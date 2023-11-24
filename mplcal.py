@@ -1,18 +1,16 @@
+import matplotlib
+matplotlib.use('Agg')
+
 import calendar
 import matplotlib.pyplot as plt
-
-calendar.setfirstweekday(6) # Sunday is 1st day in US
-w_days = 'Sun Mon Tue Wed Thu Fri Sat'.split()
-m_names = '''
-January February March April
-May June July August
-September October November December'''.split()
 
 class DayNotInMonthError(ValueError):
     pass
 
 class MplCalendar(object):
     def __init__(self, year, month):
+        calendar.setfirstweekday(6)
+
         self.year = year
         self.month = month
         self.cal = calendar.monthcalendar(year, month)
@@ -21,6 +19,9 @@ class MplCalendar(object):
         # Save the events data in the same format
         self.events = [[[] for day in week] for week in self.cal]
         self.colors = [[None for day in week] for week in self.cal]
+
+        self.w_days = 'Sun Mon Tue Wed Thu Fri Sat'.split()
+        self.m_names = 'January February March April May June July August September October November December'.split()
 
     def _monthday_to_index(self, day):
         '''The 2-d index of the day in the list of lists.
@@ -81,13 +82,13 @@ class MplCalendar(object):
                         fontsize=9)
 
         # use the titles of the first row as the weekdays
-        for n, day in enumerate(w_days):
+        for n, day in enumerate(self.w_days):
             axs[0][n].set_title(day)
 
         # Place subplots in a close grid
         f.subplots_adjust(hspace=0)
         f.subplots_adjust(wspace=0)
-        f.suptitle(m_names[self.month-1] + ' ' + str(self.year),
+        f.suptitle(self.m_names[self.month-1] + ' ' + str(self.year),
                    fontsize=20, fontweight='bold')
 
     def show(self, **kwargs):
