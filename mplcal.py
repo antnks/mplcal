@@ -47,7 +47,6 @@ class MplCalendar(object):
     def color_day(self, day, color):
         'Set square for specified day to specified color'
         week, w_day = self._monthday_to_index(day)
-        print(week, w_day)
         self.colors[week][w_day] = color
         
 
