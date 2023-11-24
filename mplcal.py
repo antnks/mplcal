@@ -50,13 +50,13 @@ class MplCalendar(object):
         self.colors[week][w_day] = color
         
 
-    def _render(self, **kwargs):
+    def _render(self, sizew=11, sizeh=8.5, sizedpi=80, **kwargs):
         'create the calendar figure'
         plot_defaults = dict(
             sharex=True,
             sharey=True,
-            figsize=(11, 8.5),
-            dpi=80,
+            figsize=(sizew, sizeh),
+            dpi=sizedpi,
         )
         plot_defaults.update(kwargs)
         f, axs = plt.subplots(
@@ -96,7 +96,7 @@ class MplCalendar(object):
         plt.show()
 
 
-    def save(self, filename, **kwargs):
+    def save(self, filename, sizew=11, sizeh=8.5, sizedpi=80, **kwargs):
         'save the calendar to the specified image file.'
-        self._render(**kwargs)
+        self._render(sizew, sizeh, sizedpi, **kwargs)
         plt.savefig(filename)
