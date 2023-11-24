@@ -88,7 +88,7 @@ class MplCalendar(object):
         f.subplots_adjust(hspace=0)
         f.subplots_adjust(wspace=0)
         f.suptitle(self.m_names[self.month-1] + ' ' + str(self.year),
-                   fontsize=20, fontweight='bold', y=0.9)
+                   fontsize=20, fontweight='bold', y=0.95)
 
     def show(self, **kwargs):
         'display the calendar'
